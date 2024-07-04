@@ -1,0 +1,12 @@
+---
+- name: Hello World demo Play
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+  - message: "Hello World!"
+  
+  tasks:
+  - name: Display Hello World
+    debug:
+      msg: "The message is: {{ message }}"
