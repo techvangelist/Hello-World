@@ -1,0 +1,16 @@
+---
+- name: Async Test
+  hosts: localhost
+
+  tasks:
+   - name: Example async
+     shell: |
+       retries_counter=0
+       max_retries=10
+       while [[ $retries_counter -le $max_retries ]]; do
+         echo “hello”
+         sleep 10
+       done
+     register: example_output
+     async: 100
+     poll: 10
