@@ -8,9 +8,22 @@
        retries_counter=0
        max_retries=10
        while [[ $retries_counter -le $max_retries ]]; do
-         echo “hello”
-         sleep 10
+         echo “hello” #>> /tmp/hello_out.txt 2>&1
+         sleep 2
+         ((retries_counter=retries_counter + 1))
        done
+       #capture_output: yes
      register: example_output
-     async: 100
-     poll: 10
+     async: 30
+     poll: 2
+       
+       #- name: Check on async task
+       #  async_status:
+       #    jid: "{{ example_output.ansible_job_id }}"
+       #  register: job_result
+       #  until: job_result.finished
+       #  retries: 15
+
+   - name: Display output
+     debug:
+       var: example_output.stdout

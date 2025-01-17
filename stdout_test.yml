@@ -1,0 +1,13 @@
+---
+- name: Standard Output Test
+  hosts: localhost
+
+  tasks:
+   - name: Example stdout
+     command: lsblk
+       #capture_output: yes
+     register: motd_output
+
+   - name: Display output
+     debug:
+       var: motd_output
