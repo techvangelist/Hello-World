@@ -1,0 +1,15 @@
+---
+- name: Fetch Files
+  hosts: blackhawk
+
+  tasks:
+  - name: Fetch a file and move it to a destination
+    ansible.builtin.fetch:
+      src: /home/asnell/Public/.ansible-navigator.yml
+      dest: /home/asnell/projects/tmp/dest/ansible-navigator.yml
+      flat: yes
+    register: fetch_output
+
+  - name: Display output
+    debug:
+      var: fetch_output
